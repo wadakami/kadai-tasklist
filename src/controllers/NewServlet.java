@@ -1,9 +1,11 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+//1個目import java.sql.Timestamp;
 
-import javax.persistence.EntityManager;
+//1個目import javax.persistence.EntityManager;
+
+import javax.servlet.RequestDispatcher;//2個目
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Tasks;
-import utils.DBUtil;
+//1個目import utils.DBUtil;
 
 /**
  * Servlet implementation class NewServlet
@@ -34,7 +36,13 @@ public class NewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		EntityManager em = DBUtil.createEntityManager();
+	    request.setAttribute("_token", request.getSession().getId());//CSRF：セキュリティ対策
+	    request.setAttribute("task", new Tasks());
+
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
+	    rd.forward(request, response);
+	    /*1個目
+	    EntityManager em = DBUtil.createEntityManager();
 		em.getTransaction().begin();
 
 		Tasks m = new Tasks();
@@ -55,7 +63,7 @@ public class NewServlet extends HttpServlet {
 		response.getWriter().append(Integer.valueOf(m.getId()).toString());
 
 		em.close();
-
+		*/
 
 	}
 
