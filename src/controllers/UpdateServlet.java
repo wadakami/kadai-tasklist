@@ -48,6 +48,12 @@ public class UpdateServlet extends HttpServlet {
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	        m.setUpdated_at(currentTime);
 
+	        em.getTransaction().begin();
+	        em.getTransaction().commit();
+	        em.close();
+
+	        request.getSession().removeAttribute("task_id");
+
 	        response.sendRedirect(request.getContextPath() + "/index");
 	    }
 
