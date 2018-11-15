@@ -14,16 +14,16 @@ import models.Tasks;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ShowServlet
+ * Servlet implementation class EditServlet
  */
-@WebServlet("/show")
-public class ShowServlet extends HttpServlet {
+@WebServlet("/edit")
+public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowServlet() {
+    public EditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +34,19 @@ public class ShowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
 	    EntityManager em = DBUtil.createEntityManager();
 
-	    Tasks m = em.find(Tasks.class, Integer.parseInt(request.getParameter("id")));//クエリパラメーターのidを取ってきてる
+	    Tasks m = em.find(Tasks.class, Integer.parseInt(request.getParameter("id")));
 
 	    em.close();
 
 	    request.setAttribute("task", m);
+	    request.setAttribute("_token", request.getSession().getId());
+	    request.getSession().setAttribute("message_id", m.getId());
 
-	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
 	    rd.forward(request, response);
+
 
 
 	}
