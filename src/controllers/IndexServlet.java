@@ -36,11 +36,27 @@ public class IndexServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	    EntityManager em = DBUtil.createEntityManager();
-        List<Tasks> tasks = em.createNamedQuery("getAllMessages", Tasks.class)
-                                .getResultList();
+
+	    int page = 1;
+	    try{
+	        page = Integer.parseInt(request.getParameter("page"));
+	    } catch(NumberFormatException e) {}
+
+	    List<Tasks> tasks = em.createNamedQuery("getAllMessages", Tasks.class)
+                                .setFirstResult(15 * (page - 1))
+                                .setMaxResults(15)
+	                            .getResultList();
+
+	    long lists_count = (long)em.createNamedQuery("getListsCount", Long.class)
+	                            .getSingleResult();
+
         em.close();
 
+
         request.setAttribute("tasks", tasks);
+        request.setAttribute("lists_count", lists_count);
+        request.setAttribute("page", page);
+
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
