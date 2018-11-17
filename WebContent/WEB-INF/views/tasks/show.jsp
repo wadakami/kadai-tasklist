@@ -19,6 +19,10 @@
 							<td><c:out value="${task.content}" /></td>
 						</tr>
 						<tr>
+							<th>期日</th>
+							<td><c:out value="${task.deadline}" /></td>
+						</tr>
+						<tr>
 							<th>作成日時</th>
 							<td><fmt:formatDate value="${task.created_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						</tr>
@@ -26,11 +30,24 @@
 							<th>更新日時</th>
 							<td><fmt:formatDate value="${task.updated_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						</tr>
+						<tr>
+							<th>ステータス</th>
+							<td>
+								<c:choose>
+									<c:when test="${task.done == 1}">
+										済み
+									</c:when>
+									<c:otherwise>
+										継続
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 
 				<p><a href="${pageContext.request.contextPath}/index">一覧に戻る</a></p>
-				<p><a href="${pageContext.request.contextPath}/edit?id=${task.id}">このメッセージを編集する</a></p>
+				<p><a href="${pageContext.request.contextPath}/edit?id=${task.id}">このタスクを編集する</a></p>
 			</c:when>
 			<c:otherwise>
 				<h2>お探しのデータは見つかりませんでした。</h2>

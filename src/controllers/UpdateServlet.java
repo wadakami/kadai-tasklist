@@ -36,6 +36,8 @@ public class UpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+
 	    String _token = (String)request.getParameter("_token");
 	    if(_token != null && _token.equals(request.getSession().getId())) {
 	        EntityManager em = DBUtil.createEntityManager();
@@ -47,6 +49,9 @@ public class UpdateServlet extends HttpServlet {
 
 	        String content = request.getParameter("content");
 	        m.setContent(content);
+
+	        Integer done = Integer.parseInt(request.getParameter("done"));
+	        m.setDone(done);
 
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	        m.setUpdated_at(currentTime);
@@ -74,6 +79,7 @@ public class UpdateServlet extends HttpServlet {
 
             }
 	    }
+
 
 
 	}

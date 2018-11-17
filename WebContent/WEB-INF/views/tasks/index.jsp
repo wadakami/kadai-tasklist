@@ -12,10 +12,24 @@
 		<ul>
 			<c:forEach var="task" items="${tasks }">
 				<li>
-					<a href="${pageContext.request.contextPath }/show?id=${task.id}">
-						<c:out value="${task.id }" />
-					</a>
-					:<c:out value="${task.title }"></c:out> &gt; <c:out value="${task.content }" />
+					<c:choose>
+						<c:when test="${task.done == 1}">
+							<div id="done">
+								<a href="${pageContext.request.contextPath }/show?id=${task.id}">
+								<c:out value="${task.id }" />
+								</a>
+								:<c:out value="${task.title }"></c:out> &gt; <c:out value="${task.content }" />
+								&nbsp; &nbsp; 〆:<c:out value="${task.deadline }" />
+							</div>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath }/show?id=${task.id}">
+							<c:out value="${task.id }" />
+							</a>
+							:<c:out value="${task.title }"></c:out> &gt; <c:out value="${task.content }" />
+							&nbsp; &nbsp; 〆:<c:out value="${task.deadline }" />
+						</c:otherwise>
+					</c:choose>
 				</li>
 			</c:forEach>
 		</ul>

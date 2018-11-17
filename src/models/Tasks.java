@@ -35,6 +35,12 @@ public class Tasks {
     @Column(name = "content", length = 255, nullable = false)
     private String content;
 
+    @Column(name = "deadline", nullable = false)
+    private String deadline;
+
+    @Column(name = "done", nullable = true)
+    private Integer done;
+
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
@@ -63,6 +69,22 @@ public class Tasks {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    public Integer getDone() {
+        return done;
+    }
+
+    public void setDone(Integer done) {
+        this.done = done;
     }
 
     public Timestamp getCreated_at() {

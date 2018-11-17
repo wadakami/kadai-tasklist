@@ -16,5 +16,12 @@
 <input type="text" name="content" value="${task.content }" />
 <br /><br />
 
-<input type="hidden" name="_token" value="${_token}" />
+<label for="deadline">期日</label><br />
+<input type="text" name="deadline" value="${task.deadline }" />
+<br /><br />
+<input type="radio" name="done" value="0" checked />継続
+<input type="radio" name="done" value="1" />済み
+
+<input type="hidden" name="_token" value="${_token}" /><br /><br />
+
 <button type="submit">作成</button>
