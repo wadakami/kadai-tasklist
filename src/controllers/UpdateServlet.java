@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -53,6 +54,14 @@ public class UpdateServlet extends HttpServlet {
 	        Integer done = Integer.parseInt(request.getParameter("done"));
 	        m.setDone(done);
 
+            Date deadline = Date.valueOf("1900-01-01");
+            String dl_str = request.getParameter("deadline");
+            if(dl_str != null && !dl_str.equals("")) {
+                 deadline = Date.valueOf(request.getParameter("deadline"));
+            }
+            m.setDeadline(deadline);
+
+
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	        m.setUpdated_at(currentTime);
 
@@ -60,6 +69,9 @@ public class UpdateServlet extends HttpServlet {
 	        List<String> errors = ListsValidator.validate(m);
             if(errors.size() > 0) {
                 em.close();
+
+                deadline = new Date(System.currentTimeMillis());
+                m.setDeadline(deadline);
 
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("task", m);

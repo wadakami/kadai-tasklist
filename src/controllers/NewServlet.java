@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 //1個目import java.sql.Timestamp;
+import java.sql.Date;
 
 //1個目import javax.persistence.EntityManager;
 
@@ -38,6 +39,11 @@ public class NewServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	    request.setAttribute("_token", request.getSession().getId());//CSRF：セキュリティ対策
 	    request.setAttribute("task", new Tasks());
+
+	    Tasks r = new Tasks();
+	    r.setDeadline(new Date(System.currentTimeMillis()));
+	    request.setAttribute("deadline", r);
+
 
 	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
 	    rd.forward(request, response);

@@ -1,5 +1,6 @@
 package models;//DTOの部分
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ public class Tasks {
     private String content;
 
     @Column(name = "deadline", nullable = false)
-    private String deadline;
+    private Date deadline;
 
     @Column(name = "done", nullable = true)
     private Integer done;
@@ -71,11 +72,11 @@ public class Tasks {
         this.content = content;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 

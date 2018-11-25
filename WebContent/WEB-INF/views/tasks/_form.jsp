@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:if test="${errors != null }">
 	<div id="flush_error">
 		入力内容にエラーがあります。<br />
@@ -17,8 +19,10 @@
 <br /><br />
 
 <label for="deadline">期日</label><br />
-<input type="text" name="deadline" value="${task.deadline }" />
+<input type="date" name="deadline" value="<fmt:formatDate value='${task.deadline }' pattern='yyyy-MM-dd'/>" >
 <br /><br />
+
+
 <input type="radio" name="done" value="0" checked />継続
 <input type="radio" name="done" value="1" />済み
 

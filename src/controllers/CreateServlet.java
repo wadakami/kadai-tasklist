@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -48,7 +49,11 @@ public class CreateServlet extends HttpServlet {
             String content = request.getParameter("content");
             m.setContent(content);
 
-            String deadline = request.getParameter("deadline");
+            Date deadline = new Date(System.currentTimeMillis());
+            String dl_str = request.getParameter("deadline");
+            if(dl_str != null && !dl_str.equals("")) {
+                deadline = Date.valueOf(request.getParameter("deadline"));
+            }
             m.setDeadline(deadline);
 
 
