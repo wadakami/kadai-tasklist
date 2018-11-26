@@ -48,13 +48,23 @@ public class CreateServlet extends HttpServlet {
 
             String content = request.getParameter("content");
             m.setContent(content);
-
+/*修正前
             Date deadline = new Date(System.currentTimeMillis());
             String dl_str = request.getParameter("deadline");
             if(dl_str != null && !dl_str.equals("")) {
                 deadline = Date.valueOf(request.getParameter("deadline"));
             }
             m.setDeadline(deadline);
+*/
+
+            Date deadline;
+            try {
+                deadline = Date.valueOf(request.getParameter("deadline"));
+            } catch(IllegalArgumentException e) {
+                deadline = null;
+            }
+            m.setDeadline(deadline);
+
 
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());

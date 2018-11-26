@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -54,6 +53,7 @@ public class UpdateServlet extends HttpServlet {
 	        Integer done = Integer.parseInt(request.getParameter("done"));
 	        m.setDone(done);
 
+/*修正前
             Date deadline = Date.valueOf("1900-01-01");
             String dl_str = request.getParameter("deadline");
             if(dl_str != null && !dl_str.equals("")) {
@@ -64,15 +64,24 @@ public class UpdateServlet extends HttpServlet {
 
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	        m.setUpdated_at(currentTime);
+*/
+	        Date deadline;
+            try {
+                deadline = Date.valueOf(request.getParameter("deadline"));
+            } catch(IllegalArgumentException e) {
+                deadline = null;
+            }
+            m.setDeadline(deadline);
+
 
 
 	        List<String> errors = ListsValidator.validate(m);
             if(errors.size() > 0) {
                 em.close();
-
+/*修正前
                 deadline = new Date(System.currentTimeMillis());
                 m.setDeadline(deadline);
-
+*/
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("task", m);
                 request.setAttribute("errors", errors);

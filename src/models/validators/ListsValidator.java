@@ -1,6 +1,5 @@
 package models.validators;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,15 @@ public class ListsValidator {
     if(!content_error.equals("")) {
         errors.add(content_error);
     }
-
+/*修正前
     String deadline_error = _validateDeadline(new SimpleDateFormat("yyyy-MM-dd").format(m.getDeadline()));
     if(!deadline_error.equals("")) {
         errors.add(deadline_error);
     }
-
+*/
+    if(m.getDeadline() == null) {
+        errors.add("期日のフォーマットが正しくありません");
+    }
 
     return errors;
 
@@ -47,7 +49,7 @@ private static String _validateContent(String content) {
     return "";
 
 }
-
+/*修正前
 private static String _validateDeadline(String deadline) {
     if(deadline.equals("1900-01-01")) {
         return "期日を入力してください。";
@@ -55,7 +57,7 @@ private static String _validateDeadline(String deadline) {
 
     return "";
 
-}
+}*/
 }
 
 
