@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -60,11 +61,11 @@ public class UpdateServlet extends HttpServlet {
                  deadline = Date.valueOf(request.getParameter("deadline"));
             }
             m.setDeadline(deadline);
-
+*/
 
 	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	        m.setUpdated_at(currentTime);
-*/
+
 	        Date deadline;
             try {
                 deadline = Date.valueOf(request.getParameter("deadline"));

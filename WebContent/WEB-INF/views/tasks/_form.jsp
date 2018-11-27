@@ -22,9 +22,18 @@
 <input type="date" name="deadline" value="<fmt:formatDate value='${task.deadline }' pattern='yyyy-MM-dd'/>" >
 <br /><br />
 
+<c:choose>
+	<c:when test="${task.done == 1}">
+		<input type="radio" name="done" value="0"  />継続
+		<input type="radio" name="done" value="1" checked/>済み
+	</c:when>
+	<c:otherwise>
+		<input type="radio" name="done" value="0" checked />継続
+		<input type="radio" name="done" value="1" />済み
+	</c:otherwise>
+</c:choose>
 
-<input type="radio" name="done" value="0" checked />継続
-<input type="radio" name="done" value="1" />済み
+
 
 <input type="hidden" name="_token" value="${_token}" /><br /><br />
 
